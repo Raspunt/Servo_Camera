@@ -1,0 +1,58 @@
+
+
+
+
+<html>
+	<head>
+	
+	<title>it just works</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+
+	</head>
+
+
+	<body>
+	
+		<div class="container">
+		
+		<img id="socketImg" src="" class="img-fluid" alt="Responsive image">
+		
+		<button onclick="SendData('left')"  type="button" class="btn btn-primary">Left</button>
+		<button onclick="SendData('right')" type="button" class="btn btn-primary">Right</button>
+
+	
+		</div>
+
+	
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+  		let socket = io();
+
+		
+		function SendData(command){
+			console.log(`Работает ${command}`)
+			socket.emit('command',command);
+			
+		
+		}
+		
+
+		socket.on('image',(image)=>{
+			let im = document.getElementById('socketImg')
+			im.src = `data:image/jpeg;base64,${image}`
+		
+		})		
+
+
+
+	</script>
+
+
+
+	</body>
+
+
+
+</html>
